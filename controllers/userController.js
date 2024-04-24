@@ -1,5 +1,9 @@
 import { dbConn } from "../db/dbConfig.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const register = async (req, res) => {
   const { username, firstname, lastname, email, password } = req.body;
@@ -41,9 +45,38 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  res.send("User logged in successfully");
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "Please fill all fields" });
+  }
+
+  try {
+    const [user] = await dbConn.query("SELECT * FROM users WHERE email = ?", [
+      email,
+    ]);
+
+    if (user.length === 0) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    const isMatch = bcrypt.compareSync(password, user[0].password);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      { userid: user[0].userid, username: user[0].username },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    return res.status(200).json({ user: user[0], token });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: "Server error" });
+  }
 };
 
-export const checkUser = async (req, res) => {
-  res.send("check user");
-};
+export const checkUser = async (req, res) => {};

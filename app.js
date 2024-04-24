@@ -1,7 +1,6 @@
 import express from "express";
 import userRoute from "./routes/userRoute.js";
 import { dbConn } from "./db/dbConfig.js";
-import { c } from "tar";
 
 const app = express();
 
