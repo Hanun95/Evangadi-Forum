@@ -1,17 +1,23 @@
-import mysql2 from "mysql2";
+import express from "express";
+import userRoute from "./routes/userRoute.js";
+import { dbConn } from "./db/dbConfig.js";
+import { c } from "tar";
 
-const dbConnection = mysql2.createPool({
-  user: "trident",
-  database: "evangadi-forum-db",
-  host: "localhost",
-  password: "trident",
-  connectionLimit: 10,
-});
+const app = express();
 
-dbConnection.execute("SELECT 'trident' ", (err, results, fields) => {
-  if (err) {
-    console.error(err.message);
-  } else {
-    console.log(results);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/users", userRoute);
+
+async function start() {
+  try {
+    const result = await dbConn.query("select 'trident' ");
+    app.listen(5000);
+    console.log("database connection established");
+    console.log("Server is running on port 5000");
+  } catch (error) {
+    console.error(error.message);
   }
-});
+}
+start();
