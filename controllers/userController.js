@@ -79,4 +79,8 @@ export const login = async (req, res) => {
   }
 };
 
-export const checkUser = async (req, res) => {};
+export const checkUser = async (req, res) => {
+  res
+    .status(200)
+    .json({ username: req.user.username, userid: req.user.userid });
+};
