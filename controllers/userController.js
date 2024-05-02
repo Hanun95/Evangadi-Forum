@@ -72,9 +72,9 @@ export const login = async (req, res) => {
       { expiresIn: "30d" }
     );
 
-    return res.status(200).json({ user: user[0], token });
+    return res.status(200).json({ token, username: user[0].username });
   } catch (error) {
-    console.error(error.message);
+    console.error("Login controller error: ", error.message);
     return res.status(500).json({ message: "Server error" });
   }
 };

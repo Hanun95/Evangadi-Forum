@@ -1,10 +1,12 @@
 import mysql2 from "mysql2";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const dbConnection = mysql2.createPool({
-  user: "trident",
-  database: "evangadi-forum-db",
+  user: process.env.USER,
+  database: process.env.DATABASE,
   host: "localhost",
-  password: "trident",
+  password: process.env.PASSWORD,
   connectionLimit: 10,
 });
 
