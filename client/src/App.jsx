@@ -1,17 +1,23 @@
 import { useState, useEffect, createContext, useCallback } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import axios from "./axiosConfig";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
 export const AppState = createContext();
 
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
+  const currentPath = window.location.pathname;
 
   const checkUser = useCallback(async () => {
+    if (currentPath === "/register") {
+      return;
+    }
     try {
       const { data } = await axios.get("/users/check", {
         headers: {
@@ -24,7 +30,7 @@ function App() {
       console.log(error);
       navigate("/login");
     }
-  }, [navigate]);
+  }, [navigate, currentPath]);
 
   useEffect(() => {
     checkUser();
@@ -32,11 +38,13 @@ function App() {
 
   return (
     <AppState.Provider value={{ user, setUser }}>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
+      <Footer />
     </AppState.Provider>
   );
 }
