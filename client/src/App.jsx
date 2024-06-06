@@ -7,6 +7,7 @@ import axios from "./axiosConfig";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import SingleQuestion from "./pages/SingleQuestion/SingleQuestion";
+import AskQuestion from "./pages/AskQuestion/AskQuestion";
 
 export const AppState = createContext();
 
@@ -45,6 +46,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/ask-question" element={<AskQuestion />} />
         <Route path="/question/:questionId" element={<SingleQuestion />} />
       </Routes>
       <Footer />
