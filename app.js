@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import userRoute from "./routes/userRoute.js";
+import questionRoute from "./routes/questionRoute.js";
+import answerRoute from "./routes/answerRoute.js";
 import { dbConn } from "./db/dbConfig.js";
 
 const app = express();
@@ -10,6 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/users", userRoute);
+app.use("/api/questions", questionRoute);
+app.use("/api/answers", answerRoute);
 
 async function start() {
   try {

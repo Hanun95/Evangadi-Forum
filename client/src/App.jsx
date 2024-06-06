@@ -1,11 +1,12 @@
 import { useState, useEffect, createContext, useCallback } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import axios from "./axiosConfig";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import SingleQuestion from "./pages/SingleQuestion/SingleQuestion";
 
 export const AppState = createContext();
 
@@ -18,6 +19,7 @@ function App() {
     if (currentPath === "/register") {
       return;
     }
+
     try {
       const { data } = await axios.get("/users/check", {
         headers: {
@@ -43,6 +45,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/question/:questionId" element={<SingleQuestion />} />
       </Routes>
       <Footer />
     </AppState.Provider>

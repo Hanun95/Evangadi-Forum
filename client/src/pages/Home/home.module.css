@@ -1,0 +1,41 @@
+.container {
+  min-height: calc(100vh - 312px);
+  max-width: 1240px;
+  width: 96%;
+  margin: 0 auto;
+}
+
+.welcomeWrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 3rem 0 1.5rem;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 25px;
+  background-color: rgb(49, 49, 219);
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.container p {
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 2rem 0 1rem;
+  border-bottom: 1px solid #aaa;
+}
+
+.questionsWrapper {
+  margin-bottom: 4rem;
+}

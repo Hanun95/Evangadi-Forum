@@ -84,3 +84,15 @@ export const checkUser = async (req, res) => {
     .status(200)
     .json({ username: req.user.username, userid: req.user.userid });
 };
+
+export const getUser = async (req, res) => {
+  const [user] = await dbConn.query("SELECT * FROM users WHERE userid = ?", [
+    req.params.userId,
+  ]);
+
+  if (user.length === 0) {
+    return res.status(404).send("User not found");
+  }
+
+  res.send(user);
+};
