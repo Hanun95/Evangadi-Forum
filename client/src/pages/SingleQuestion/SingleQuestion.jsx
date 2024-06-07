@@ -4,6 +4,7 @@ import styles from "./singleQuestion.module.css";
 import { useContext, useEffect, useState } from "react";
 import AnswerCard from "./AnswerCard/AnswerCard";
 import { AppState } from "../../App";
+import { applyStyleForCodes } from "../../util/applyStyleForCodes";
 
 export default function SingleQuestion() {
   const [question, setQuestion] = useState(null);
@@ -63,6 +64,8 @@ export default function SingleQuestion() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const modifiedAnswer = applyStyleForCodes(answer);
+
     try {
       await axios.post(
         `/answers/${questionId}`,
@@ -78,7 +81,7 @@ export default function SingleQuestion() {
 
       setAnswers((prevAnswers) => [
         ...prevAnswers,
-        { answer, username: user.username },
+        { answer: modifiedAnswer, username: user.username },
       ]);
 
       setAnswer("");
@@ -98,6 +101,12 @@ export default function SingleQuestion() {
 
       <div className={styles.answers}>
         <h2>Answer From the Community</h2>
+        {answers.length === 0 && (
+          <div className={styles.empty}>
+            <img src="/empty.png" alt="empty" />
+            <p>be the first to answer</p>
+          </div>
+        )}
         <div>
           {answers.map((answer, index) => (
             <AnswerCard

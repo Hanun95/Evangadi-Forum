@@ -104,3 +104,27 @@
   margin-right: auto !important;
   text-align: left !important;
 }
+
+.answerQuestion code,
+.answerQuestion h5 {
+  font-size: 5rem;
+  background: black;
+}
+
+.code {
+  background: #000;
+}
+
+.empty {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #999;
+  padding: 4rem 0 6rem;
+  text-align: center;
+}
+
+.empty img {
+  width: 100px;
+  filter: grayscale(40%);
+  margin-inline: auto;
+}

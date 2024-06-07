@@ -20,6 +20,8 @@ export default function Home() {
           },
         });
 
+        console.log(data);
+
         const updatedQuestions = await Promise.all(
           data.map(async (question) => {
             const username = await getUsername(question.userid);
@@ -45,7 +47,7 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.welcomeWrapper}>
         <div className={styles.button}>
-          <Link to="">Add Question</Link>
+          <Link to="/ask-question">Ask Question</Link>
         </div>
         <span className={styles.username}>Welcome {username}</span>
       </div>

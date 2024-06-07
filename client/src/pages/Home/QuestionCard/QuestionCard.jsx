@@ -21,6 +21,9 @@ export default function QuestionCard({ question, isLast }) {
         </Link>
       </div>
       <MdNavigateNext className={styles.nextIcon} />
+      <Link to={`/question/${question?.id}`} className={styles.view}>
+        read more
+      </Link>
     </div>
   );
 }

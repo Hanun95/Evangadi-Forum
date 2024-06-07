@@ -45,3 +45,47 @@
 .border {
   border-bottom: 1px solid #aaa;
 }
+
+.view {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .user {
+    padding: 0;
+  }
+
+  .userAvatar {
+    font-size: 3rem;
+  }
+
+  .user > span {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 596px) {
+  .question {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .question > div {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nextIcon {
+    display: none;
+  }
+
+  .view {
+    display: block;
+    font-weight: 500;
+    color: #ff8500;
+  }
+}

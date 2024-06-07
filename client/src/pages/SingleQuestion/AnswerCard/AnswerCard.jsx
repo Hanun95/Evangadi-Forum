@@ -1,9 +1,11 @@
 import propTypes from "prop-types";
 import styles from "./answerCard.module.css";
 import { BsPersonCircle } from "react-icons/bs";
+import { applyStyleForCodes } from "../../../util/applyStyleForCodes";
 
 export default function AnswerCard({ answer, isLast }) {
   console.log(answer);
+
   return (
     <div
       key={answer?.id}
@@ -15,7 +17,13 @@ export default function AnswerCard({ answer, isLast }) {
           <span>{answer?.username}</span>
         </div>
 
-        <p className={styles.title}>{answer?.answer}</p>
+        <div
+          className={styles.ans}
+          dangerouslySetInnerHTML={{
+            __html: "<p>" + applyStyleForCodes(answer?.answer) + "</p>",
+          }}
+        ></div>
+        {/* <p className={styles.ans}>{answer?.answer}</p> */}
       </div>
     </div>
   );

@@ -31,8 +31,14 @@
 
 .button {
   background: rgb(47, 47, 255);
-  color: hsl(0, 0%, 100%);
+  color: hwb(0 100% 0%);
   padding: 5px 30px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: rgb(46, 46, 209);
+  color: #fff;
 }
 
 @media screen and (max-width: 768px) {
@@ -46,7 +52,7 @@
 
   .button {
     padding: 4px 12px;
-    font-size: 14px;
-    min-width: 76px;
+    font-size: 12px;
+    min-width: 67px;
   }
 }
