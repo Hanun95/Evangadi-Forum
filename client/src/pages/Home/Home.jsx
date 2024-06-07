@@ -116,6 +116,12 @@ export default function Home() {
           </form>
         </div>
         <div className={styles.questionsWrapper}>
+          {questions?.length == 0 && (
+            <div className={styles.empty}>
+              <img src="/empty.png" alt="empty" />
+              <p>no question</p>
+            </div>
+          )}
           {questions.map((question, index) => (
             <QuestionCard
               key={question.id}

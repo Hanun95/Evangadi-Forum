@@ -73,6 +73,20 @@
   margin-bottom: 4rem;
 }
 
+.empty {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #999;
+  padding: 4rem 0 6rem;
+  text-align: center;
+}
+
+.empty img {
+  width: 100px;
+  filter: grayscale(40%);
+  margin-inline: auto;
+}
+
 @media screen and (max-width: 768px) {
   .container {
     padding: 0 10px;
