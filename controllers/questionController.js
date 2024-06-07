@@ -45,3 +45,11 @@ export const getQuestion = async (req, res) => {
 
   res.send(question);
 };
+
+export const searchQuestions = async (req, res) => {
+  const [questions] = await dbConn.query(
+    "SELECT * FROM questions WHERE title LIKE ?",
+    [`%${req.params.searchQuery}%`]
+  );
+  res.send(questions);
+};

@@ -32,8 +32,41 @@
 .container p {
   font-size: 1.2rem;
   font-weight: 500;
-  padding: 2rem 0 1rem;
+}
+
+.searchWrapper {
   border-bottom: 1px solid #aaa;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  align-items: end;
+}
+
+.searchWrapper form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchWrapper input {
+  width: 200px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  outline: none;
+  margin: 0 10px;
+}
+
+.searchWrapper button {
+  padding: 5px 10px;
+  background-color: transparent;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-left: -44px;
+  transition: all 0.3s ease;
 }
 
 .questionsWrapper {
