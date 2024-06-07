@@ -2,7 +2,7 @@ export function applyStyleForCodes(input) {
   let replacedString = input
     .split("//")
     .join(
-      `</span><code style="background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace;">`
+      `</span><code style="background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 1rem;">`
     );
   replacedString = replacedString
     .split("\\\\")
