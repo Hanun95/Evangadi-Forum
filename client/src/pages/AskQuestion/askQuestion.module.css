@@ -115,8 +115,6 @@
 }
 
 .wordCounter {
-  /* margin-top: 4px; */
   height: 4px;
-  background: rgb(138, 114, 25);
   align-self: self-start;
 }

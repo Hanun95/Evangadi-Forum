@@ -12,6 +12,8 @@ export default function AskQuestion() {
   console.log(input);
 
   const handleChange = (e) => {
+    if (e.target.name === "title" && e.target.value.length > MAX_TITLE_LENGTH)
+      return;
     setInput((prevInput) => ({
       ...prevInput,
       [e.target.name]: e.target.value,
@@ -77,10 +79,10 @@ export default function AskQuestion() {
           <div
             style={{
               width: (input.title.length / MAX_TITLE_LENGTH) * 100 + "%",
-              // backgroundColor:
-              //   input.title.length / MAX_TITLE_LENGTH > 0.75
-              //     ? "yellow"
-              //     : "green",
+              backgroundColor:
+                input.title.length / MAX_TITLE_LENGTH > 0.75
+                  ? "#ffa500"
+                  : "#0dff00",
             }}
             className={styles.wordCounter}
           ></div>
