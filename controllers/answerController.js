@@ -23,7 +23,7 @@ export const postAnswer = async (req, res) => {
     return res.status(500).send("Failed to post answer");
   }
 
-  res.send("Answer posted");
+  res.status(201).send("Answer posted");
 };
 
 export const getAnswers = async (req, res) => {

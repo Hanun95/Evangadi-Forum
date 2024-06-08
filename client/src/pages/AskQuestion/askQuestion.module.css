@@ -101,3 +101,22 @@
   margin-right: auto !important;
   text-align: left !important;
 }
+
+.error {
+  color: red;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 1rem auto 0rem;
+  background: rgba(216, 54, 54, 0.494);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+.wordCounter {
+  /* margin-top: 4px; */
+  height: 4px;
+  background: rgb(138, 114, 25);
+  align-self: self-start;
+}

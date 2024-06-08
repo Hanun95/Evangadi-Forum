@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import axios from "../../axiosConfig";
 import { AppState } from "../../App";
 import styles from "./home.module.css";
@@ -11,64 +11,47 @@ export default function Home() {
     user: { username },
   } = useContext(AppState);
   const [questions, setQuestions] = useState([]);
-  // const [searchQuery, setSearchQuery] = useState("");
+
+  const fetchQuestions = useCallback(async () => {
+    try {
+      const { data } = await axios.get("/questions", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      console.log(data);
+
+      const updatedQuestions = await Promise.all(
+        data.map(async (question) => {
+          const username = await getUsername(question.userid);
+          return { ...question, username };
+        })
+      );
+
+      setQuestions(updatedQuestions);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const { data } = await axios.get("/questions", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-
-        console.log(data);
-
-        const updatedQuestions = await Promise.all(
-          data.map(async (question) => {
-            const username = await getUsername(question.userid);
-            return { ...question, username };
-          })
-        );
-
-        setQuestions(updatedQuestions);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchQuestions();
-  }, []);
+  }, [fetchQuestions]);
 
   const getUsername = async (userId) => {
     const res = await axios.get(`/users/${userId}`);
     return res.data[0].username;
   };
 
-  // const handleSearch = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const { data } = await axios.get(`/questions/search/${searchQuery}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-
-  //     const updatedQuestions = await Promise.all(
-  //       data.map(async (question) => {
-  //         const username = await getUsername(question.userid);
-  //         return { ...question, username };
-  //       })
-  //     );
-
-  //     setQuestions(updatedQuestions);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleSearch = async (e) => {
     e.preventDefault();
+
+    if (e.target.value.trim() === "") {
+      fetchQuestions();
+      return;
+    }
+
     try {
       const { data } = await axios.get(`/questions/search/${e.target.value}`, {
         headers: {
@@ -106,8 +89,6 @@ export default function Home() {
               type="text"
               placeholder="Search Questions"
               className={styles.search}
-              // value={searchQuery}
-              // onChange={(e) => setSearchQuery(e.target.value)}
               onChange={(e) => handleSearch(e)}
             />
             <button type="submit" className={styles.button}>

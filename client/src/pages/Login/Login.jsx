@@ -8,6 +8,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -15,8 +16,10 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (!inputs?.email || !inputs?.password) {
+      setError("Please fill all fields");
       return console.log("Please fill all fields");
     }
 
@@ -25,9 +28,13 @@ export default function Login() {
       if (status === 200) {
         localStorage.setItem("token", data.token);
         navigate("/");
+      } else {
+        console.log(data);
+        setError(data.message);
       }
     } catch (error) {
       console.log(error.response.data.message);
+      setError(error.response.data.message);
     }
   };
 
@@ -36,6 +43,7 @@ export default function Login() {
       <div className={styles.innerWrapper}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <h2>Login to your account</h2>
+          {error && <div className={styles.error}>{error}</div>}
           <div>
             <input
               name="email"

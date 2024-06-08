@@ -128,3 +128,15 @@
   filter: grayscale(40%);
   margin-inline: auto;
 }
+
+.error {
+  color: red;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 1rem auto 0rem;
+  background: rgba(216, 54, 54, 0.494);
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  width: 90%;
+  text-align: center;
+}

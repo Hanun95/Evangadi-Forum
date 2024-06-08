@@ -25,7 +25,7 @@ export const postQuestion = async (req, res) => {
     return res.status(500).send("Failed to post question");
   }
 
-  res.send("Question posted");
+  res.status(201).send("Question posted");
 };
 
 export const getQuestions = async (req, res) => {
@@ -43,7 +43,7 @@ export const getQuestion = async (req, res) => {
     return res.status(404).send("Question not found");
   }
 
-  res.send(question);
+  res.status(200).send(question);
 };
 
 export const searchQuestions = async (req, res) => {
@@ -51,5 +51,5 @@ export const searchQuestions = async (req, res) => {
     "SELECT * FROM questions WHERE title LIKE ?",
     [`%${req.params.searchQuery}%`]
   );
-  res.send(questions);
+  res.status(200).send(questions);
 };

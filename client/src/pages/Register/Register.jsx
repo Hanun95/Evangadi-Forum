@@ -8,9 +8,11 @@ export default function Register() {
   const navigate = useNavigate();
   const [inputs, setInputs] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (
       !inputs?.username ||
@@ -19,6 +21,7 @@ export default function Register() {
       !inputs?.email ||
       !inputs?.password
     ) {
+      setError("Please fill all fields");
       return console.log("Please fill all fields");
     }
 
@@ -27,9 +30,12 @@ export default function Register() {
 
       if (res.status === 201) {
         navigate("/login");
+      } else {
+        setError(res.data.message);
       }
       console.log(res.data);
     } catch (error) {
+      setError(error.response.data.message);
       console.log(error.response.data.message);
     }
   };
@@ -38,15 +44,13 @@ export default function Register() {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  console.log(inputs);
-
   return (
     <section className={styles.container}>
       <div className={styles.innerWrapper}>
         <form onSubmit={handleSubmit} className={styles.form}>
           <h2>Join the network</h2>
+          {error && <div className={styles.error}>{error}</div>}
           <div>
-            {/* <span className="">Email</span> */}
             <input
               onChange={handleChange}
               name="email"

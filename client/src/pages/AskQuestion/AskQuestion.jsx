@@ -5,7 +5,9 @@ import { useState } from "react";
 
 export default function AskQuestion() {
   const [input, setInput] = useState({ title: "", description: "" });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const MAX_TITLE_LENGTH = 200;
 
   console.log(input);
 
@@ -18,20 +20,34 @@ export default function AskQuestion() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (input.title.trim() == "" || input.description.trim() == "") {
+      setError("Please fill all fields");
+      return;
+    }
+
     try {
-      await axios.post(`/questions`, input, {
+      const { status, data } = await axios.post(`/questions`, input, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
+      if (status !== 201) {
+        setError(data.message);
+        return;
+      }
+
       navigate("/");
       setInput({ title: "", description: "" });
     } catch (error) {
+      setError(error.response.data.message);
       console.log(error);
     }
   };
 
+  console.log((input.title.length / MAX_TITLE_LENGTH) * 100 + "%");
   return (
     <div className={styles.container}>
       <div className={styles.guide}>
@@ -50,6 +66,7 @@ export default function AskQuestion() {
           <Link to="/">Go to Question page</Link>
         </p>
         <form onSubmit={handleSubmit}>
+          {error && <div className={styles.error}>{error}</div>}
           <input
             type="text"
             placeholder="Title"
@@ -57,6 +74,16 @@ export default function AskQuestion() {
             onChange={handleChange}
             value={input?.title}
           />
+          <div
+            style={{
+              width: (input.title.length / MAX_TITLE_LENGTH) * 100 + "%",
+              // backgroundColor:
+              //   input.title.length / MAX_TITLE_LENGTH > 0.75
+              //     ? "yellow"
+              //     : "green",
+            }}
+            className={styles.wordCounter}
+          ></div>
           <textarea
             placeholder="Your Answer..."
             name="description"

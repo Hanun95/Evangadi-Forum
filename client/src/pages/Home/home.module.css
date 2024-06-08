@@ -103,4 +103,18 @@
   .button {
     padding: 5px 10px;
   }
+
+  .searchWrapper input {
+    width: 150px;
+    padding: 5px 5px;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 596px) {
+  .searchWrapper input {
+    width: 120px;
+    padding: 4px 4px;
+    font-size: 0.7rem;
+  }
 }

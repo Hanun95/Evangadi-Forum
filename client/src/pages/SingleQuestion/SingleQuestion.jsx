@@ -10,9 +10,9 @@ export default function SingleQuestion() {
   const [question, setQuestion] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [answer, setAnswer] = useState("");
+  const [error, setError] = useState("");
   const { questionId } = useParams();
   const { user } = useContext(AppState);
-  console.log(user);
 
   useEffect(() => {
     async function fetchQuestion() {
@@ -47,7 +47,7 @@ export default function SingleQuestion() {
           })
         );
 
-        setAnswers(updatedAnswers);
+        setAnswers(updatedAnswers.reverse());
       } catch (error) {
         console.log(error);
       }
@@ -63,11 +63,17 @@ export default function SingleQuestion() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (answer.trim() === "") {
+      setError("answer cannot be empty");
+      return;
+    }
 
     const modifiedAnswer = applyStyleForCodes(answer);
 
     try {
-      await axios.post(
+      const { status, data } = await axios.post(
         `/answers/${questionId}`,
         {
           answer,
@@ -79,6 +85,11 @@ export default function SingleQuestion() {
         }
       );
 
+      if (status !== 201) {
+        setError(data.message);
+        return;
+      }
+
       setAnswers((prevAnswers) => [
         ...prevAnswers,
         { answer: modifiedAnswer, username: user.username },
@@ -86,6 +97,7 @@ export default function SingleQuestion() {
 
       setAnswer("");
     } catch (error) {
+      setError(error.response.data.message);
       console.log(error);
     }
   };
@@ -121,8 +133,9 @@ export default function SingleQuestion() {
       <div className={styles.answerQuestion}>
         <h2>Answer The Top Question</h2>
         <p>
-          <Link to="">Go to Question page</Link>
+          <Link to="/">Go to Question page</Link>
         </p>
+        {error && <div className={styles.error}>{error}</div>}
         <form onSubmit={handleSubmit}>
           <textarea
             placeholder="Your Answer..."
