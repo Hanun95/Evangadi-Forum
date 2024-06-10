@@ -114,7 +114,12 @@
   text-align: center;
 }
 
+.wordCounterContainer {
+  width: 98%;
+  margin-inline: auto;
+}
+
 .wordCounter {
-  height: 4px;
+  height: 2px;
   align-self: self-start;
 }

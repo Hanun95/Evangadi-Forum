@@ -7,7 +7,7 @@ export default function AskQuestion() {
   const [input, setInput] = useState({ title: "", description: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const MAX_TITLE_LENGTH = 200;
+  const MAX_TITLE_LENGTH = 50;
 
   console.log(input);
 
@@ -76,16 +76,18 @@ export default function AskQuestion() {
             onChange={handleChange}
             value={input?.title}
           />
-          <div
-            style={{
-              width: (input.title.length / MAX_TITLE_LENGTH) * 100 + "%",
-              backgroundColor:
-                input.title.length / MAX_TITLE_LENGTH > 0.75
-                  ? "#ffa500"
-                  : "#0dff00",
-            }}
-            className={styles.wordCounter}
-          ></div>
+          <div className={styles.wordCounterContainer}>
+            <div
+              style={{
+                width: (input.title.length / MAX_TITLE_LENGTH) * 100 + "%",
+                backgroundColor:
+                  input.title.length / MAX_TITLE_LENGTH > 0.75
+                    ? "#ff7500"
+                    : "#0dff00",
+              }}
+              className={styles.wordCounter}
+            ></div>
+          </div>
           <textarea
             placeholder="Your Answer..."
             name="description"
