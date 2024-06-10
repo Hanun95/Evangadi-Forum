@@ -16,9 +16,16 @@ export default function QuestionCard({ question, isLast }) {
             <span>{question?.username}</span>
           </div>
 
-          <Link to={`/question/${question?.id}`} className={styles.title}>
+          {/* <Link to={`/question/${question?.id}`} className={styles.title}>
             {question?.title}
-          </Link>
+          </Link> */}
+          <Link
+            to={`/question/${question?.id}`}
+            className={styles.title}
+            dangerouslySetInnerHTML={{
+              __html: question?.title,
+            }}
+          ></Link>
         </div>
         <MdNavigateNext
           className={`${styles.nextIcon} ${

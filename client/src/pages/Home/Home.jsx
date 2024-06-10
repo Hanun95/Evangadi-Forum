@@ -66,6 +66,15 @@ export default function Home() {
         })
       );
 
+      const searchTerm = e.target.value;
+
+      updatedQuestions.forEach((question) => {
+        const edited = question.title
+          .split(searchTerm)
+          .join(`<span style="color: orange !important;">${searchTerm}</span>`);
+        question.title = edited;
+      });
+
       setQuestions(updatedQuestions);
     } catch (error) {
       console.log(error);
