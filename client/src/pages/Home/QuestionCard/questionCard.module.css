@@ -1,9 +1,21 @@
+.container {
+  /*width: 100%;
+  border-bottom: 1px solid #e0e0e0;
+  */
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}
+
 .question {
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #444;
   padding: 1rem 0;
+  transition: height 0.5s ease-in-out;
 }
 
 .nextIcon {
@@ -40,6 +52,21 @@
 .title {
   font-size: 1.5rem;
   font-weight: 600;
+  color: #222;
+}
+
+.description {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #666;
+  padding: 1rem 0 1rem 6rem;
+}
+
+.descriptionTopBorder {
+  width: calc(100% - 10rem);
+  height: 2px;
+  background: #ccc;
+  margin: 0 4rem 0 auto;
 }
 
 .border {
@@ -48,6 +75,15 @@
 
 .view {
   display: none;
+}
+
+.nextIcon {
+  transition: transform 0.5s ease-in-out;
+}
+
+.rotateNextButton {
+  transform: rotate(90deg);
+  transition: transform 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {
@@ -79,7 +115,9 @@
     gap: 1rem;
   }
 
-  .nextIcon {
+  .nextIcon,
+  .description,
+  .descriptionTopBorder {
     display: none;
   }
 

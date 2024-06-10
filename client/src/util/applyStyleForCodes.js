@@ -2,7 +2,7 @@ export function applyStyleForCodes(input) {
   let replacedString = input
     .split("//")
     .join(
-      `</span><code style="background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 1rem;">`
+      `</span><code style="background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 1rem; width: fit-content;">`
     );
   replacedString = replacedString
     .split("\\\\")
@@ -10,7 +10,7 @@ export function applyStyleForCodes(input) {
   replacedString = replacedString
     .split(">>>")
     .join(
-      `</span><pre><code style="display: block;  margin-top: 10px; background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace;">`
+      `</span><pre><code style="display: block;  margin-top: 10px; background-color: #ccc; color: #000; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', monospace; width: fit-content;">`
     );
   replacedString = replacedString.split("<<<").join("</code></pre>");
   return (

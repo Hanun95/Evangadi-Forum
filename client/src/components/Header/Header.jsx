@@ -4,10 +4,11 @@ import { AppState } from "../../App";
 import { useContext } from "react";
 
 export default function Header() {
-  const { user } = useContext(AppState);
+  const { user, setUser } = useContext(AppState);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    setUser(null);
     window.location.reload();
   };
 
