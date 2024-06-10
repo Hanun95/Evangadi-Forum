@@ -64,7 +64,7 @@
 
 .descriptionTopBorder {
   width: calc(100% - 10rem);
-  height: 2px;
+  height: 1px;
   background: #ccc;
   margin: 0 4rem 0 auto;
 }

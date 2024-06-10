@@ -70,7 +70,7 @@ export default function Home() {
 
       updatedQuestions.forEach((question) => {
         const edited = question.title
-          .split(searchTerm)
+          .split(searchTerm.trim())
           .join(`<span style="color: orange !important;">${searchTerm}</span>`);
         question.title = edited;
       });
