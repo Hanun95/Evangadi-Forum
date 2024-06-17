@@ -20,7 +20,7 @@ export default function QuestionCard({ question, isLast }) {
             {question?.title}
           </Link> */}
           <Link
-            to={`/question/${question?.id}`}
+            to={`/question/${question?._id}`}
             className={styles.title}
             dangerouslySetInnerHTML={{
               __html: question?.title,

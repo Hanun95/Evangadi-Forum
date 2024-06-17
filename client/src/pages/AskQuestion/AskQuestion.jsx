@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import axios from "../../axiosConfig";
+import axios from "axios";
 import styles from "./askQuestion.module.css";
 import { useState } from "react";
 
@@ -30,7 +30,7 @@ export default function AskQuestion() {
     }
 
     try {
-      const { status, data } = await axios.post(`/questions`, input, {
+      const { status, data } = await axios.post(`/api/questions`, input, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
