@@ -1,5 +1,6 @@
 import { dbConn } from "../db/dbConfig.js";
 
+
 export const postAnswer = async (req, res) => {
   const [question] = await dbConn.query(
     "SELECT * FROM questions WHERE id = ?",
