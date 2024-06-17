@@ -42,7 +42,7 @@ export default function SingleQuestion() {
 
         const updatedAnswers = await Promise.all(
           data.map(async (question) => {
-            const username = await getUsername(question.userid);
+            const username = await getUsername(question.userId);
             return { ...question, username };
           })
         );
