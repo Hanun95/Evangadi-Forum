@@ -53,7 +53,7 @@ export default function AskQuestion() {
   return (
     <div className={styles.container}>
       <div className={styles.guide}>
-        <h2>Answer From the Community</h2>
+        <h2>Steps to write a good Question</h2>
         <ul>
           <li>Summerize your problem in a one-line title.</li>
           <li>Describe your problem in more detail.</li>
@@ -63,7 +63,7 @@ export default function AskQuestion() {
       </div>
 
       <div className={styles.askQuestion}>
-        <h2>Answer The Top Question</h2>
+        <h2>Ask a public question</h2>
         <p>
           <Link to="/">Go to Question page</Link>
         </p>
@@ -89,7 +89,7 @@ export default function AskQuestion() {
             ></div>
           </div>
           <textarea
-            placeholder="Your Answer..."
+            placeholder="Question Description..."
             name="description"
             onChange={handleChange}
             value={input?.description}
